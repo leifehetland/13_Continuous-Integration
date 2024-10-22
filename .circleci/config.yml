@@ -3,54 +3,12 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@3.3.1
 
-jobs:
-  start-server:
-    docker:
-      - image: cypress/base:latest
-    steps:
-      - checkout
-      - run:
-          name: Install curl
-          command: npm install -y curl
-      - run:
-          name: Install dependencies
-          command: npm install
-  run-e2e-tests:
-    docker:
-     - image: cypress/base:latest
-    environment:
-      MONGODB_URI: mongodb+srv://lhetland:rootROOT@cluster0.aysiw.mongodb.net/wordGuessTest?retryWrites=true&w=majority&appName=Cluster0
-    steps:
-      - checkout
-      - run:
-          name: Install curl
-          command: apt-get update && apt-get install -y curl
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run: 
-          name: Start start-server
-          command: nohup npm run start:dev &
-      - run: 
-          name: Wait for server
-          command: |
-            while ! curl --output /dev/null --silent --head --fail http://127.0.0.1:3000; do
-              echo "Waiting for server to start"
-              sleep 5
-            done
-            echo "Server is up"
-      - run:
-          name: Run Cypress E2E tests
-          command: npx cypress run --browser electron --headless
-      
-
 workflows:
   run-tests:
     jobs:
-      - start-server
-      - run-e2e-tests:
-          requires:
-            - start-server
-  
+      - cypress/run:
+          name: run-e2e-tests
+          cypress-command:  npx wait-on@latest http://localhost:3000 && npx cypress run --browser electron --headless
           # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
+          start-command: npm run start:dev
           
