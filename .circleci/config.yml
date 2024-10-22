@@ -6,6 +6,7 @@ orbs:
 jobs:
   start-server:
     docker:
+      - image: cimg/base:current
       - image: cypress/base:latest
     steps:
       - checkout
@@ -17,6 +18,7 @@ jobs:
           command: npm install
   run-e2e-tests:
     docker:
+     - image: cimg/base:current
      - image: cypress/base:latest
     environment:
       MONGODB_URI: mongodb+srv://lhetland:rootROOT@cluster0.aysiw.mongodb.net/wordGuessTest?retryWrites=true&w=majority&appName=Cluster0
