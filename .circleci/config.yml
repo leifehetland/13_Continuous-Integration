@@ -34,7 +34,7 @@ jobs:
       - run: 
           name: Wait for server
           command: |
-            until nc -z localhost 3001; do
+            while ! curl --output /dev/null --silent --head --fail http://localhost:3000; do
               echo "Waiting for server to start"
               sleep 5
             done
