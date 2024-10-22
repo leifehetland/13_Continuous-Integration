@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  cypress: cypress-io/cypress@3.4.1
+  cypress: cypress-io/cypress@3.4.0
 
 workflows:
   run-tests:
@@ -11,4 +11,3 @@ workflows:
           start-command: npm run start:dev
           cypress-command: npx cypress run --browser electron --headless
           # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
-          
