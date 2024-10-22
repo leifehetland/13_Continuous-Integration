@@ -24,7 +24,10 @@ jobs:
           command: npm install
       - run:
           name: Run Cypress E2E tests
-          command: npm run start:dev && npx cypress run --browser electron --headless
+          command: npx cypress run --browser electron --headless
+      - run: 
+          name: Start start-server
+          command: npm run start:dev
 
 workflows:
   run-tests:
