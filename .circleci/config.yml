@@ -10,9 +10,9 @@ jobs:
       - image: cypress/base:latest
     steps:
       - checkout
-      - run:
-          name: Install curl
-          command: npm install -y curl
+      # - run:
+      #     name: Install curl
+      #     command: npm install -y curl
       - run:
           name: Install dependencies
           command: npm install
@@ -24,9 +24,9 @@ jobs:
       MONGODB_URI: mongodb+srv://lhetland:rootROOT@cluster0.aysiw.mongodb.net/wordGuessTest?retryWrites=true&w=majority&appName=Cluster0
     steps:
       - checkout
-      - run:
-          name: Install curl
-          command: npm install -y curl
+      # - run:
+          # name: Install curl
+          # command: npm install -y curl
       - run:
           name: Install dependencies
           command: npm install
