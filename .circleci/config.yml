@@ -24,7 +24,15 @@ jobs:
           command: npm install
       - run: 
           name: Start start-server
-          command: npm run start:dev
+          command: nohup npm run start:dev &
+      - run: 
+          name: Wait for server
+          command: |
+            until curl --output /dev/null --silent --head --fail http://localhost:3000; do
+              echo "Waiting for server to start"
+              sleep 5
+            done
+            echo "Server is up"
       - run:
           name: Run Cypress E2E tests
           command: npx cypress run --browser electron --headless
