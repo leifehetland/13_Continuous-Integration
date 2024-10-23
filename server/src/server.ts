@@ -5,7 +5,7 @@ import routes from './routes/index.js';
 
 await db();
 
-const PORT = process.env.PORT || 3001;
+const PORT = parseInt(process.env.PORT || '3001', 10);
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +20,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`API server running on port ${PORT}!`);
 });
