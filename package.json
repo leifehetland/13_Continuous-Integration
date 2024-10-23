@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.3",
-    "wait-on": "^8.0.1"
+    "wait-on": "^8.0.1",
+    "concurrently": "^8.2.2"
   }
 }
