@@ -20,6 +20,9 @@ jobs:
           - run:
               name: run-e2e-tests
               command: npm run circleci-run
+          - run:
+              name: Stop server
+              command: kill $(jobs -p) || true
             
 
 workflows:
