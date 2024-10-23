@@ -33,7 +33,7 @@ jobs:
           command: npm run start
       - run:
           name: Run Cypress E2E tests
-          command: npx wait-on@latest http://localhost:3000 && npx cypress run --browser electron --headless
+          command: npx wait-on@latest http://localhost:3001 && npx cypress run --browser electron --headless
       
       
 
