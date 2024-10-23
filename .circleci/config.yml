@@ -16,6 +16,13 @@ jobs:
           name: Start the application
           command: npm run start:dev &
       - run:
+          name: Check server logs
+          command: |
+            echo "Waiting a few seconds for the server to start..."
+            sleep 5  # Give it a moment to start
+            echo "Checking server status"
+            curl http://localhost:3000 || echo "Server is not running yet"  # Check if the server is accessible
+      - run:
           name: Wait for the server to start
           command: npx wait-on http://localhost:3000
 
