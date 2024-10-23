@@ -4,9 +4,9 @@ orbs:
   cypress: cypress-io/cypress@3.3.1
 
 jobs:
-  run-tests:
+  custom-run-tests:
     docker:
-      - image: cypress/base:16  # Use a Cypress-compatible Docker image
+      - image: cypress/base:16  # Cypress-compatible image
     steps:
       - checkout
       - run:
@@ -19,10 +19,10 @@ jobs:
           name: Wait for the server to start
           command: npx wait-on http://localhost:3000
       - cypress/run:
-          name: run-e2e-tests
-          cypress-command: npx cypress run --browser electron --headless
+          browser: electron
+          headless: true
 
 workflows:
   run-tests:
     jobs:
-      - run-tests
+      - custom-run-tests
