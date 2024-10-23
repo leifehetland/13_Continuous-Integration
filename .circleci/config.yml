@@ -3,13 +3,26 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@3.3.1
 
-workflows:
+jobs:
   run-tests:
-    jobs:
+    docker:
+      - image: cypress/base:16  # Use a Cypress-compatible Docker image
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Start the application
+          command: npm run start:dev &
+      - run:
+          name: Wait for the server to start
+          command: npx wait-on http://localhost:3000
       - cypress/run:
           name: run-e2e-tests
           cypress-command: npx cypress run --browser electron --headless
-          # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
-          start-command: npm run start:dev
-          wait-on: http://localhost:3000
-          no-wait-on-timeout: true
+
+workflows:
+  run-tests:
+    jobs:
+      - run-tests
