@@ -23,8 +23,8 @@ jobs:
           - run:
               name: Wait for Server to Start
               command: |
-                npm run start:dev
-                npx wait-on http://localhost:3000 # Replace with your server's URL
+                npm run start:dev 
+                npx wait-on http://localhost:3000 && npx cypress run --browser electron --headless
           
               # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
               # start-command: npm run start:dev
@@ -37,9 +37,10 @@ workflows:
   run-tests:
     jobs:
       - start-server
-      - cypress/run:
-              name: run-e2e-tests
-              cypress-command: npx cypress run --browser electron --headless
+      # - cypress/run:
+      #         name: run-e2e-tests
+      #         cypress-command: 
+              
       
       
           # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
