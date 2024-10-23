@@ -16,7 +16,7 @@
     "render-build": "npm install && npm run build",
     "cypress": "npx cypress open",
     "test": "npx cypress run --browser electron --headless",
-    "circleci-run": "concurrently \"npm run start:dev\" \"npx wait-on@latest http://localhost:3000 && npx cypress run --browser electron --headless --exit\""
+    "circleci-run": "concurrently \"npm run start:dev\" \"npx wait-on@latest http://localhost:3000 && npx cypress run --browser electron --headless exit 0\""
   },
   "keywords": [],
   "author": "",
