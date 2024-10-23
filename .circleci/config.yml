@@ -33,7 +33,7 @@ jobs:
           command: npx wait-on@latest http://localhost:3000 && npx cypress run --browser electron --headless
       - run: 
           name: Start start-server
-          command: npm run start:dev
+          command: npm run build && npm run start
       
 
 workflows:
