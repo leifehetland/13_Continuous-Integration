@@ -17,12 +17,13 @@ jobs:
           - run:
               name: Install specific packages
               command: npm install concurrently wait-on
-          - run:
-              name: Start the Server
-              command: npm run start:dev # Start the server in the background
+          # - run:
+          #     name: Start the Server
+          #     command: npm run start:dev # Start the server in the background
           - run:
               name: Wait for Server to Start
               command: |
+                npm run start:dev
                 npx wait-on http://localhost:3000 # Replace with your server's URL
           
               # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
