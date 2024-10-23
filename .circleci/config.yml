@@ -10,9 +10,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install curl
-          command: npm install -y curl
-      - run:
           name: Install dependencies
           command: npm install
   run-e2e-tests:
