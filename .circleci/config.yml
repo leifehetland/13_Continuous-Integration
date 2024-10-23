@@ -6,7 +6,7 @@ orbs:
 jobs:
   custom-run-tests:
     docker:
-      - image: cypress/base:16  # Use a Cypress-compatible image
+      - image: cypress/base:16  # Cypress-compatible image
     steps:
       - checkout
       - run:
@@ -27,5 +27,4 @@ workflows:
           name: run-e2e-tests
           requires:
             - custom-run-tests
-          browser: electron
-          headless: true
+          cypress-command: npx cypress run --browser electron --headless
