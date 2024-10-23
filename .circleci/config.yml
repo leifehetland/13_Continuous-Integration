@@ -7,14 +7,6 @@ jobs:
   start-server:
     docker:
       - image: cypress/base:latest
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-  run-e2e-tests:
-    docker:
-      - image: cypress/base:latest
     environment:
       MONGODB_URI: mongodb+srv://lhetland:rootROOT@cluster0.aysiw.mongodb.net/wordGuessTest?retryWrites=true&w=majority&appName=Cluster0
     steps:
@@ -22,16 +14,16 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
-      - cypress/run:
-          name: Run Cypress E2E tests
-          cypress-command: npx wait-on@latest http://localhost:3000 && npx cypress run --browser electron --headless
-          start-command: npm run start:dev
       
 
 workflows:
   run-tests:
     jobs:
       - start-server
-      - run-e2e-tests
+      - cypress/run:
+          name: run-e2e-tests
+          cypress-command: npx wait-on@latest http://localhost:3000 && npx cypress run
+          # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
+          start-command: npm run start:dev
   
           # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
