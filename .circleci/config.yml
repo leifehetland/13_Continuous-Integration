@@ -34,4 +34,4 @@ workflows:
           name: run-e2e-tests
           requires:
             - custom-run-tests
-          cypress-command: npx cypress run --browser electron --headless
+          cypress-command: npm run start:dev && npx cypress run --browser electron --headless
