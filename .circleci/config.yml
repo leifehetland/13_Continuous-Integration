@@ -7,8 +7,8 @@ jobs:
   start-server:
         docker:
           - image: cypress/base:latest
-        environment:
-          MONGODB_URI: mongodb+srv://lhetland:rootROOT@cluster0.aysiw.mongodb.net/wordGuessTest?retryWrites=true&w=majority&appName=Cluster0
+        # environment:
+        #   MONGODB_URI: mongodb+srv://lhetland:rootROOT@cluster0.aysiw.mongodb.net/wordGuessTest?retryWrites=true&w=majority&appName=Cluster0
         steps:
           - checkout
           - run:
