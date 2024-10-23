@@ -16,7 +16,7 @@ jobs:
           command: npm install
       - run:
           name: Start server
-          command: npm run start &
+          command: npm run start:dev &
       - run:
           name: Wait for server to start
           command: npx wait-on@latest http://localhost:3001
