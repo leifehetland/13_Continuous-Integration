@@ -11,3 +11,5 @@ workflows:
           cypress-command: npx cypress run --browser electron --headless
           # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
           start-command: npm run start:dev
+          wait-on: http://localhost:3000
+          no-wait-on-timeout: true
