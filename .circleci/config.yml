@@ -1,36 +1,26 @@
 version: 2.1
 
-# orbs:
-#   cypress: cypress-io/cypress@3.3.1
+orbs:
+  cypress: cypress-io/cypress@3.3.1
 
 jobs:
   start-server:
         docker:
           - image: cypress/base:latest
-        # environment:
-        #   MONGODB_URI: mongodb+srv://lhetland:rootROOT@cluster0.aysiw.mongodb.net/wordGuessTest?retryWrites=true&w=majority&appName=Cluster0
         steps:
           - checkout
           - run:
               name: Install dependencies
               command: npm install
           - run:
-              name: Install specific packages
-              command: npm install concurrently wait-on
-          - run:
-              name: run-e2e-tests
-              command: npm run circleci-run
-          # - run:
-          #     name: Stop any lingering processes
-          #     command: |
-          #       jobs -p | xargs kill || true  # Kill any remaining background jobs if they exist
-            
+              name: Build the app
+              command: npm run build
 
 workflows:
   run-tests:
     jobs:
       - start-server
-      
-          # Make sure to add MONGODB_URI to ENVIRONMENT VARIABLES in CircleCI so that the tests can connect to the database
-          
+      - cypress/run:
+          name: run-component-tests
+          cypress-command: npx cypress run --component
           
